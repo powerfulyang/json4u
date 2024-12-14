@@ -4,19 +4,22 @@ import GitHub from "@/components/icons/GitHub";
 import Logo from "@/components/icons/Logo";
 import Twitter from "@/components/icons/Twitter";
 import Weibo from "@/components/icons/Weibo";
-import Typography from "@/components/ui/typography";
 import { isCN } from "@/lib/env";
-import { filter } from "lodash-es";
 import { useTranslations } from "next-intl";
 
 export default function Footer() {
   const t = useTranslations("Home");
   const items: FooterLinkProps[] = [
     { href: "https://www.trustpilot.com/review/json4u.com", title: t("Give a rating") },
-    { href: "https://github.com/loggerhead/json4u/issues/new", title: t("Feedback") },
-    isCN
-      ? { href: "https://weibo.com/loggerhead", title: <Weibo className="icon" /> }
-      : { href: "https://x.com/1oggerhead", title: <Twitter className="icon" /> },
+    ...(isCN
+      ? [
+          { href: "https://support.qq.com/product/670462", title: t("Feedback") },
+          { href: "https://weibo.com/loggerhead", title: <Weibo className="icon" /> },
+        ]
+      : [
+          { href: "https://github.com/loggerhead/json4u/issues/new", title: t("Feedback") },
+          { href: "https://x.com/1oggerhead", title: <Twitter className="icon" /> },
+        ]),
     { href: "https://github.com/loggerhead/json4u", title: <GitHub className="icon" /> },
   ];
 
@@ -28,7 +31,6 @@ export default function Footer() {
           <span>{"© 2024 JSON For You"}</span>
         </div>
         <Legal />
-        <FriendLinks />
         <div className="ml-auto lg:flex hidden gap-8">
           {items.map((item, i) => (
             <FooterLink key={i} title={item.title} href={item.href} />
@@ -36,24 +38,6 @@ export default function Footer() {
         </div>
       </div>
     </footer>
-  );
-}
-
-function FriendLinks() {
-  const t = useTranslations("Home");
-  const friends = filter([isCN ? { href: "https://www.apiyi.com", title: "API易" } : undefined]) as FooterLinkProps[];
-
-  if (friends.length === 0) {
-    return null;
-  }
-
-  return (
-    <div className="lg:flex hidden items-center justify-center gap-1">
-      <Typography>{t("Friends")}</Typography>
-      {friends.map((item, i) => (
-        <FooterLink key={i} title={item.title} href={item.href} />
-      ))}
-    </div>
   );
 }
 
