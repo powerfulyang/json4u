@@ -14,7 +14,7 @@ const jiti = createJiti(fileURLToPath(import.meta.url));
 jiti("./src/lib/env");
 
 const isDev = process.env.NODE_ENV === "development";
-const isCN = /\.cn(:3000)?$/.test(process.env.NEXT_PUBLIC_APP_URL);
+const isCN = true;
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 /** @type {import("next").NextConfig} */
