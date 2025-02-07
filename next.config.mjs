@@ -27,7 +27,7 @@ const nextConfig = {
   pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
   experimental: {
     serverActions: {
-      allowedOrigins: ["json4u.com", "*.json4u.com", "json4u.cn", "*.json4u.cn"],
+      allowedOrigins: ["us4ever.com", "*.us4ever.com"],
     },
     optimizePackageImports: [
       "react-use",
@@ -87,7 +87,7 @@ export default withSentryConfig(config, {
   // https://github.com/getsentry/sentry-webpack-plugin#options
   org: "loggerhead",
   project: "json4u",
-  enable: !isDev,
+  enable: !isDev && enableSourceMap,
   authToken: enableSourceMap ? process.env.SENTRY_AUTH_TOKEN : undefined,
   // avoid build failed when miss SENTRY_AUTH_TOKEN
   sourcemaps: {

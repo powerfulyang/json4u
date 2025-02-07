@@ -9,16 +9,16 @@ import { ThemeProvider } from "next-themes";
 export async function generateMetadata() {
   const locale = await getLocale();
   const t = await getTranslations({ locale, namespace: "Metadata" });
-
+ 
   return {
     metadataBase: new URL(env.NEXT_PUBLIC_APP_URL),
     alternates: {
       canonical: "/",
-      languages: {
-        en: "https://json4u.com",
-        zh: "https://json4u.cn",
-        "x-default": isCN ? "/zh" : "/en",
-      },
+      // languages: {
+      //   en: "https://json4u.com",
+      //   zh: "https://json4u.cn",
+      //   "x-default": isCN ? "/zh" : "/en",
+      // },
     },
     applicationName: t("name"),
     title: {
@@ -40,7 +40,6 @@ export async function generateMetadata() {
       siteName: t("name"),
       title: t("title"),
       description: t("description"),
-      authors: ["loggerhead"],
       images: [{ url: `${env.NEXT_PUBLIC_APP_URL}/apple-icon.png`, width: 512, height: 512, alt: t("name") }],
     },
     twitter: {
